@@ -1,9 +1,9 @@
 import Education from '../models/Education';
 
 export default {
-  Query: {
-    education: () => Education.find({}),
-  },
+  // Query: {
+  //   education: () => Education.find({}),
+  // },
   // Mutation: {
   //   createPersonalInfo: async (_, { firstName, lastName, birthDate, mobile, email }) => {
   //     const personalInfo = new PersonalInfo({ firstName, lastName, birthDate, mobile, email });

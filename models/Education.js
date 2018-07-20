@@ -1,13 +1,6 @@
 import mongoose, { Schema } from 'mongoose';
 
-export const educationTypes = `
-  type Query {
-    education: Education
-  }
-
-  type Mutation {
-  }
-
+const educationTypeDef = `
   type Education {
     id: ID!,
     name: String!,
@@ -17,13 +10,17 @@ export const educationTypes = `
 }
 `;
 
-const mongooseSchema = Schema({
+const educationSchema = Schema({
   name: String,
   type: String,
-  startDate: Date,
-  endDate: Date,
-});
+  startDate: String,
+  endDate: String,
+}, { collection: 'Education' });
 
-const Education = mongoose.model('Education', mongooseSchema)
+const educationModel = mongoose.model('Education', educationSchema)
 
-export default Education;
+export default {
+  typeDef: educationTypeDef,
+  schema: educationSchema,
+  model: educationModel
+};
