@@ -3,16 +3,16 @@ import mongoose, { Schema } from 'mongoose';
 const educationTypeDef = `
   type Education {
     id: ID!,
-    name: String!,
-    type: String!,
+    title: String!,
+    description: String!,
     startDate: String!,
     endDate: String!,
 }
 `;
 
 const educationSchema = Schema({
-  name: String,
-  type: String,
+  title: String,
+  description: String,
   startDate: String,
   endDate: String,
 }, { collection: 'Education' });

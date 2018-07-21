@@ -8,8 +8,8 @@ const cvTypeDef = `
 
   type Mutation {
     updatePersonalInfo(id: ID!, firstName: String, lastName: String, birthDate: String, mobile: String, email: String): CV
-    updateEducation(id: ID!, cvid: ID!, name: String, type: String, startDate: String, endDate: String): Education
-    insertEducation(cvid: ID!, name: String!, type: String!, startDate: String!, endDate: String): [Education]
+    updateEducation(id: ID!, cvid: ID!, title: String, description: String, startDate: String, endDate: String): Education
+    insertEducation(cvid: ID!, title: String!, description: String!, startDate: String!, endDate: String): [Education]
   }
 
   type CV {
