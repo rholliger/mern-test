@@ -24,12 +24,32 @@ export default {
     insertEducation: async (_, parameters) => {
       const { cvid, ...object } = parameters;
       const currentCV = await CV.model.findById(cvid);
-      const newEducation = new Education.model(object);
-      currentCV.education.push(newEducation);
+      currentCV.education.push(object);
       await currentCV.save();
       return currentCV.education;
+    },
+    insertLanguage: async (_, parameters) => {
+      const { cvid, ...object } = parameters;
+      const currentCV = await CV.model.findById(cvid);
+      currentCV.languages.push(object);
+      await currentCV.save();
+      return currentCV.languages;
     }
   },
+  CV: {
+    languages: (_, parameters) => {
+      const newLanguages = [];
+      for (var i = 0; i < _.languages.length; i++) {
+        if(_.languages[i].skill === 'VERY_GOOD') {
+          const newLanguage = _.languages[i];
+          newLanguage.skill = 'Very good';
+          newLanguages.push(newLanguage);
+        }
+      }
+
+      return newLanguages;
+    }
+  }
   // CV: {
   //   lastEducation: (ceevee, { first }) => {
   //     if(first) {

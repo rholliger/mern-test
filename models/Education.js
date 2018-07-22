@@ -15,12 +15,9 @@ const educationSchema = Schema({
   description: String,
   startDate: String,
   endDate: String,
-}, { collection: 'Education' });
-
-const educationModel = mongoose.model('Education', educationSchema)
+});
 
 export default {
   typeDef: educationTypeDef,
   schema: educationSchema,
-  model: educationModel
 };

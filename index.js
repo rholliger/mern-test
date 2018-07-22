@@ -5,13 +5,14 @@ import mongoose from 'mongoose';
 import CVResolver from './resolvers/CV';
 import CV from './models/CV';
 import Education from './models/Education';
+import Languages from './models/Languages';
 
 const Schema = mongoose.Schema;
 
 mongoose.connect('mongodb://localhost/test')
 
 const server = new GraphQLServer({
-  typeDefs: mergeTypes([ CV.typeDef, Education.typeDef ]),
+  typeDefs: mergeTypes([ CV.typeDef, Education.typeDef, Languages.typeDef ]),
   resolvers: mergeResolvers([ CVResolver ])
 });
 
