@@ -13,6 +13,15 @@ export default {
       await updatedInfo.save();
       return updatedInfo;
     },
+    insertWorkexperience: async (_, parameters) => {
+      const { cvid, ...object } = parameters;
+      const updatedCV = await CV.model.findByIdAndUpdate(cvid, {
+          $addToSet: { workexperience: object }
+        }, {
+          new: true, upsert: true
+        });
+      return updatedCV.workexperience;
+    },
     updateEducation: async (_, parameters) => {
       const { cvid, id, ...object } = parameters;
       const currentCV = await CV.model.findById(cvid);
@@ -28,13 +37,37 @@ export default {
       await currentCV.save();
       return currentCV.education;
     },
+    insertCertificate: async (_, { cvid, name, type, url }) => {
+      const updatedCV = await CV.model.findByIdAndUpdate(cvid, {
+          $addToSet: { certificates: { name, type, url } }
+        }, {
+          new: true, upsert: true
+        });
+      return updatedCV.certificates;
+    },
     insertLanguage: async (_, parameters) => {
       const { cvid, ...object } = parameters;
       const currentCV = await CV.model.findById(cvid);
       currentCV.languages.push(object);
       await currentCV.save();
       return currentCV.languages;
-    }
+    },
+    insertSkills: async (_, { cvid, genre, values }) => {
+      const updatedCV = await CV.model.findByIdAndUpdate(cvid, {
+          $addToSet: { skills: { genre, values } }
+        }, {
+          new: true, upsert: true
+        });
+      return updatedCV.skills;
+    },
+    insertHobbies: async (_, { cvid, hobbies }) => {
+      const updatedCV = await CV.model.findByIdAndUpdate(cvid, {
+          $addToSet: { hobbies: hobbies }
+        }, {
+          new: true, upsert: true
+        });
+      return updatedCV.hobbies;
+    },
   },
   CV: {
     languages: (_, parameters) => {
