@@ -12,13 +12,7 @@ const cvTypeDef = `
   }
 
   type Mutation {
-    updatePersonalInfo(id: ID!, firstName: String, lastName: String, birthDate: String, mobile: String, email: String): CV
-    insertWorkexperience(cvid: ID!, companyName: String!, function: String!, description: String, fromDate: String!, toDate: String, tasks: [String]): [Workexperience]
-    updateEducation(id: ID!, cvid: ID!, title: String, description: String, startDate: String, endDate: String): Education
-    insertEducation(cvid: ID!, title: String!, description: String!, startDate: String!, endDate: String): [Education]
-    insertCertificate(cvid: ID!, name: String!, type: String, url: String): [Certificate]
-    insertLanguage(cvid: ID!, language: String!, skill: LanguageSkill): [Language]
-    insertSkills(cvid: ID!, genre: String!, values: [String]): [Skill]
+    updatePersonalInfo(id: ID!, firstName: String, lastName: String, birthDate: String, maritalStatus: String, imageUrl: String, motivationalSpeech: String): CV
     insertHobbies(cvid: ID!, hobbies: [String]): [String]
   }
 

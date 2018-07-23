@@ -13,53 +13,6 @@ export default {
       await updatedInfo.save();
       return updatedInfo;
     },
-    insertWorkexperience: async (_, parameters) => {
-      const { cvid, ...object } = parameters;
-      const updatedCV = await CV.model.findByIdAndUpdate(cvid, {
-          $addToSet: { workexperience: object }
-        }, {
-          new: true, upsert: true
-        });
-      return updatedCV.workexperience;
-    },
-    updateEducation: async (_, parameters) => {
-      const { cvid, id, ...object } = parameters;
-      const currentCV = await CV.model.findById(cvid);
-      const updatedEducation = currentCV.education.id(id);
-      updatedEducation.set(object);
-      await currentCV.save();
-      return updatedEducation;
-    },
-    insertEducation: async (_, parameters) => {
-      const { cvid, ...object } = parameters;
-      const currentCV = await CV.model.findById(cvid);
-      currentCV.education.push(object);
-      await currentCV.save();
-      return currentCV.education;
-    },
-    insertCertificate: async (_, { cvid, name, type, url }) => {
-      const updatedCV = await CV.model.findByIdAndUpdate(cvid, {
-          $addToSet: { certificates: { name, type, url } }
-        }, {
-          new: true, upsert: true
-        });
-      return updatedCV.certificates;
-    },
-    insertLanguage: async (_, parameters) => {
-      const { cvid, ...object } = parameters;
-      const currentCV = await CV.model.findById(cvid);
-      currentCV.languages.push(object);
-      await currentCV.save();
-      return currentCV.languages;
-    },
-    insertSkills: async (_, { cvid, genre, values }) => {
-      const updatedCV = await CV.model.findByIdAndUpdate(cvid, {
-          $addToSet: { skills: { genre, values } }
-        }, {
-          new: true, upsert: true
-        });
-      return updatedCV.skills;
-    },
     insertHobbies: async (_, { cvid, hobbies }) => {
       const updatedCV = await CV.model.findByIdAndUpdate(cvid, {
           $addToSet: { hobbies: hobbies }
@@ -73,11 +26,20 @@ export default {
     languages: (_, parameters) => {
       const newLanguages = [];
       for (var i = 0; i < _.languages.length; i++) {
-        if(_.languages[i].skill === 'VERY_GOOD') {
-          const newLanguage = _.languages[i];
-          newLanguage.skill = 'Very good';
-          newLanguages.push(newLanguage);
-        }
+        const newLanguage = _.languages[i];
+        switch(_.languages[i].skill) {
+          case 'VERY_GOOD':
+            newLanguage.skill = 'Very good';
+            break;
+          case 'GOOD':
+            newLanguage.skill = 'Good';
+            break;
+          case 'MOTHER_TONGUE':
+            newLanguage.skill = 'Mother Tongue';
+            break;
+        };
+
+        newLanguages.push(newLanguage);
       }
 
       return newLanguages;

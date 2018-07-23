@@ -1,6 +1,10 @@
 import mongoose, { Schema } from 'mongoose';
 
 const languagesTypeDef = `
+  type Mutation {
+    insertLanguage(cvid: ID!, language: String!, skill: LanguageSkill): [Language]
+  }
+
   type Language {
     id: ID!,
     language: String!,

@@ -1,21 +1,21 @@
-import Education from '../models/Education';
+import CV from '../models/CV';
 
 export default {
-  // Query: {
-  //   education: () => Education.find({}),
-  // },
-  // Mutation: {
-  //   createPersonalInfo: async (_, { firstName, lastName, birthDate, mobile, email }) => {
-  //     const personalInfo = new PersonalInfo({ firstName, lastName, birthDate, mobile, email });
-  //     await personalInfo.save();
-  //     return personalInfo;
-  //   },
-  //   updatePersonalInfo: async (_, parameters) => {
-  //     const { id, ...object } = parameters;
-  //     const newPersonalInfo = await PersonalInfo.findById(id);
-  //     newPersonalInfo.set(object)
-  //     await newPersonalInfo.save();
-  //     return newPersonalInfo;
-  //   }
-  // }
+  Mutation: {
+    updateEducation: async (_, parameters) => {
+      const { cvid, id, ...object } = parameters;
+      const currentCV = await CV.model.findById(cvid);
+      const updatedEducation = currentCV.education.id(id);
+      updatedEducation.set(object);
+      await currentCV.save();
+      return updatedEducation;
+    },
+    insertEducation: async (_, parameters) => {
+      const { cvid, ...object } = parameters;
+      const currentCV = await CV.model.findById(cvid);
+      currentCV.education.push(object);
+      await currentCV.save();
+      return currentCV.education;
+    },
+  }
 }
