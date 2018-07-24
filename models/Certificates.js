@@ -3,6 +3,8 @@ import mongoose, { Schema } from 'mongoose';
 const certificatesTypeDef = `
   type Mutation {
     insertCertificate(cvid: ID!, name: String!, type: String, url: String): [Certificate]
+    updateCertificate(cvid: ID!, id: ID!, name: String, type: String, url: String): Certificate
+    deleteCertificate(cvid: ID!, id: ID!): [Certificate]
   }
 
   type Certificate {

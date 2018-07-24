@@ -4,6 +4,7 @@ const contactTypeDef = `
   type Mutation {
     updateContact(id: ID!, phone: String, email: String): Contact
     insertSocialMedia(id: ID!, type: String, url: String): [SocialMedia]
+    deleteSocialMedia(cvid: ID!, id: ID!): [SocialMedia]
   }
 
   type Contact {
@@ -13,6 +14,7 @@ const contactTypeDef = `
   }
 
   type SocialMedia {
+    id: ID,
     type: String!,
     url: String!,
   }

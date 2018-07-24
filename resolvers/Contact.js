@@ -16,6 +16,13 @@ export default {
           new: true, upsert: true
         });
       return updatedContact.contact.socialMedia;
-    },    
+    },
+    deleteSocialMedia: async (_, { cvid, id }) => {
+      const currentCV = await CV.model.findById(cvid);
+      console.log(currentCV.contact);
+      const socialMedia = currentCV.contact.socialMedia.pull({ _id: id });
+      await currentCV.save();
+      return socialMedia; // Is this needed for deletion?
+    },
   }
 }
