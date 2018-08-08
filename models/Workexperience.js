@@ -4,6 +4,7 @@ const workexperienceTypeDef = `
   type Mutation {
     insertWorkexperience(cvid: ID!, companyName: String!, function: String!, description: String, fromDate: String!, toDate: String, tasks: [String]): [Workexperience]
     updateWorkexperience(cvid: ID!, id: ID!, companyName: String, function: String, description: String, fromDate: String, toDate: String, tasks: [String]): Workexperience
+    removeWorkexperience(cvid: ID!, id: ID!): [Workexperience]
   }
   
   type Workexperience {

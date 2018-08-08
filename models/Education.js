@@ -2,8 +2,9 @@ import mongoose, { Schema } from 'mongoose';
 
 const educationTypeDef = `
   type Mutation {
-    updateEducation(id: ID!, cvid: ID!, title: String, description: String, startDate: String, endDate: String): Education
+    updateEducation(cvid: ID!, id: ID!, title: String, description: String, startDate: String, endDate: String): Education
     insertEducation(cvid: ID!, title: String!, description: String!, startDate: String!, endDate: String): [Education]
+    deleteEducation(cvid: ID! id: ID!): [Education]
   }
 
   type Education {

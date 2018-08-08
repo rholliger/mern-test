@@ -3,6 +3,8 @@ import mongoose, { Schema } from 'mongoose';
 const skillsTypeDef = `
   type Mutation {
     insertSkills(cvid: ID!, genre: String!, values: [String]): [Skill]
+    addSkills(cvid: ID!, id: ID!, skills: [String]!): Skill
+    removeGenre(cvid: ID!, id: ID!): [Skill]
   }
 
   type Skill {

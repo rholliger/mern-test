@@ -46,10 +46,10 @@ export default {
     }
   }
   // CV: {
-  //   lastEducation: (ceevee, { first }) => {
+  //   lastEducation: (cv, { first }) => {
   //     if(first) {
-  //       console.log(ceevee.education);
-  //       return ceevee.education;
+  //       console.log(cv.education);
+  //       return cv.education;
   //     }
   //   }
   // }

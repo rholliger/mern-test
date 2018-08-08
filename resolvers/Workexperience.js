@@ -19,5 +19,11 @@ export default {
       await currentCV.save();
       return currentWorkexperience;
     },
+    removeWorkexperience: async (_, { cvid, id }) => {
+      const currentCV = await CV.model.findById(cvid);
+      currentCV.workexperience.pull({ _id: id });
+      await currentCV.save();
+      return currentCV.workexperience; // Is this needed for deletion?
+    },
   }
 }

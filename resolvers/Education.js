@@ -17,5 +17,12 @@ export default {
       await currentCV.save();
       return currentCV.education;
     },
+    deleteEducation: async (_, { cvid, id }) => {
+      const currentCV = await CV.model.findById(cvid);
+      console.log(currentCV.education);
+      const education = currentCV.education.pull({ _id: id });
+      await currentCV.save();
+      return currentCV.education; // Is this needed for deletion?
+    },
   }
 }
